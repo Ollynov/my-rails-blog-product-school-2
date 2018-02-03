@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Workspace</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+  <% if alert %>
+    <p class="bg-warning alert"><%= alert %></p>
+  <% end %>
+  <!--<nav class="nav navbar-inverse">-->
+  <% if !current_page?(root_url) %>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <% if user_signed_in? %>
+          <p class="logged-in-as">Logged in as <strong><%= current_user.email %></strong></p>
+          <%= link_to 'Edit profile', edit_user_registration_path, :class => 'btn btn-secondary my-2 my-sm-0 registrations' %> |
+          <%= link_to "Logout", destroy_user_session_path, :class => 'btn btn-secondary my-2 my-sm-0'  %>
+        <% else %>
+          <%= link_to "Sign up", new_user_registration_path, :class => 'btn btn-secondary my-2 my-sm-0 registrations'  %> |
+          <%= link_to "Login", new_user_session_path, :class => 'btn btn-secondary my-2 my-sm-0'  %>
+        <% end %>
+    </nav>
+  <% end %>
+
+
+<%= yield %>
+
+</body>
+</html>
+
